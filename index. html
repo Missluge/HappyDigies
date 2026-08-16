@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HappyDigies — Discover Digital Possibilities</title>
+
+  <meta name="description" content="HappyDigies helps you discover useful digital products, tools, courses, templates and resources.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070711;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Animated background */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(117, 74, 255, .20), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(0, 210, 255, .14), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(255, 70, 180, .12), transparent 30%),
+        #070711;
+    }
+
+    .orb {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .35;
+      animation: float 10s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      background: #7c4dff;
+      top: 10%;
+      left: -100px;
+    }
+
+    .orb.two {
+      background: #00d9ff;
+      right: -100px;
+      top: 40%;
+      animation-delay: -3s;
+    }
+
+    .orb.three {
+      background: #ff45b5;
+      bottom: -100px;
+      left: 40%;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(50px, -40px, 0) scale(1.15);
+      }
+    }
+
+    /* Navigation */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 7, 17, .55);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #9b7cff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: .92rem;
+      color: #c7c7d5;
+    }
+
+    .nav-links a {
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-button {
+      padding: 11px 18px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #8d67ff, #5f3cff);
+      font-weight: 700;
+      box-shadow: 0 0 25px rgba(124,77,255,.35);
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 7% 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 16px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+      border-radius: 30px;
+      color: #c9bfff;
+      margin-bottom: 25px;
+      font-size: .85rem;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 7.5rem);
+      line-height: .92;
+      letter-spacing: -6px;
+      margin-bottom: 30px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #a98cff, #59e5ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #b8b8c9;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 15px 25px;
+      border-radius: 35px;
+      font-weight: 700;
+      transition: .35s;
+    }
+
+    .primary-btn {
+      background: #ffffff;
+      color: #080811;
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-5px);
+    }
+
+    /* 3D visual */
+
+    .hero-visual {
+      position: absolute;
+      right: 7%;
+      top: 25%;
+      width: 330px;
+      height: 330px;
+      perspective: 900px;
+    }
+
+    .cube {
+      width: 230px;
+      height: 230px;
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      transform-style: preserve-3d;
+      animation: rotateCube 15s linear infinite;
+    }
+
+    .face {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: linear-gradient(
+        135deg,
+        rgba(142,104,255,.25),
+        rgba(0,220,255,.08)
+      );
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: inset 0 0 50px rgba(255,255,255,.04);
+    }
+
+    .front  { transform: translateZ(115px); }
+    .back   { transform: rotateY(180deg) translateZ(115px); }
+    .right  { transform: rotateY(90deg) translateZ(115px); }
+    .left   { transform: rotateY(-90deg) translateZ(115px); }
+    .top    { transform: rotateX(90deg) translateZ(115px); }
+    .bottom { transform: rotateX(-90deg) translateZ(115px); }
+
+    @keyframes rotateCube {
+      from {
+        transform: rotateX(-15deg) rotateY(0deg);
+      }
+      to {
+        transform: rotateX(345deg) rotateY(360deg);
+      }
+    }
+
+    /* Sections */
+
+    section {
+      padding: 120px 7%;
+      position: relative;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 55px;
+    }
+
+    .section-heading small {
+      color: #9f86ff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      margin-top: 15px;
+      letter-spacing: -3px;
+    }
+
+    .section-heading p {
+      margin-top: 18px;
+      color: #a8a8b8;
+      line-height: 1.7;
+    }
+
+    /* Categories */
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+    }
+
+    .category {
+      flex: 0 0 auto;
+      padding: 15px 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      color: #d8d8e4;
+      transition: .3s;
+    }
+
+    .category:hover {
+      background: #ffffff;
+      color: #080811;
+      transform: translateY(-4px);
+    }
+
+    /* Products */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      min-height: 310px;
+      padding: 28px;
+      border-radius: 25px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.09);
+      backdrop-filter: blur(15px);
+      transition: .4s;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) rotateX(2deg) rotateY(-2deg);
+      border-color: rgba(156,124,255,.45);
+      box-shadow: 0 25px 70px rgba(0,0,0,.35);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,#8d67ff,#35d8ff);
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #a8a8b8;
+      line-height: 1.6;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 25px;
+      color: #b49cff;
+      font-weight: 700;
+    }
+
+    /* Story */
+
+    .story {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .story-content {
+      max-width: 900px;
+    }
+
+    .story h2 {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      letter-spacing: -5px;
+      line-height: 1;
+    }
+
+    .story p {
+      margin: 30px auto 0;
+      max-width: 650px;
+      color: #aaaabc;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 70px 7% 30px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.25);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand {
+      max-width: 350px;
+    }
+
+    .footer-brand p {
+      color: #9999aa;
+      line-height: 1.7;
+      margin-top: 15px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 18px;
+    }
+
+    .footer-column a {
+      display: block;
+      color: #9999aa;
+      margin-bottom: 12px;
+      font-size: .9rem;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .copyright {
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: #777789;
+      font-size: .85rem;
+    }
+
+    /* Scroll animation */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-visual {
+        opacity: .3;
+        right: -80px;
+      }
+
+      .products {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        padding: 18px 5%;
+      }
+
+      .hero {
+        padding: 130px 5% 80px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-visual {
+        width: 230px;
+        height: 230px;
+        right: -80px;
+        top: 35%;
+      }
+
+      .cube,
+      .face {
+        width: 160px;
+        height: 160px;
+      }
+
+      .front  { transform: translateZ(80px); }
+      .back   { transform: rotateY(180deg) translateZ(80px); }
+      .right  { transform: rotateY(90deg) translateZ(80px); }
+      .left   { transform: rotateY(-90deg) translateZ(80px); }
+      .top    { transform: rotateX(90deg) translateZ(80px); }
+      .bottom { transform: rotateX(-90deg) translateZ(80px); }
+
+      section {
+        padding: 90px 5%;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading h2 {
+        letter-spacing: -2px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <!-- Navigation -->
+
+  <nav>
+    <a href="#" class="logo">Happy<span>Digies</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#discover">Discover</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#story">Our Story</a></li>
+    </ul>
+
+    <a href="#discover" class="nav-button">Explore</a>
+  </nav>
+
+  <!-- Hero -->
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="badge">✦ Discover something useful</div>
+
+      <h1>
+        Find the
+        <span class="gradient-text">digital</span>
+        things that move you forward.
+      </h1>
+
+      <p>
+        Welcome to HappyDigies — a curated world of digital products,
+        tools, courses, templates and resources designed to help you
+        learn, create, work and grow.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#discover" class="primary-btn">Start Discovering →</a>
+        <a href="#categories" class="secondary-btn">Explore Categories</a>
+      </div>
+
+    </div>
+
+    <div class="hero-visual" data-parallax>
+      <div class="cube">
+
+        <div class="face front">✦</div>
+        <div class="face back">H</div>
+        <div class="face right">D</div>
+        <div class="face left">✧</div>
+        <div class="face top">+</div>
+        <div class="face bottom">✦</div>
+
+      </div>
+    </div>
+
+  </header>
+
+  <!-- Categories -->
+
+  <section id="categories" class="reveal">
+
+    <div class="section-heading">
+      <small>Explore</small>
+      <h2>Something for every kind of creator.</h2>
+      <p>
+        Browse useful digital resources across different areas of life,
+        business, learning and creativity.
+      </p>
+    </div>
+
+    <div class="categories">
+      <a class="category" href="#">AI Tools</a>
+      <a class="category" href="#">Business</a>
+      <a class="category" href="#">Marketing</a>
+      <a class="category" href="#">Finance</a>
+      <a class="category" href="#">Skills</a>
+      <a class="category" href="#">Courses</a>
+      <a class="category" href="#">Ebooks</a>
+      <a class="category" href="#">Templates</a>
+    </div>
+
+  </section>
+
+  <!-- Products -->
+
+  <section id="discover">
+
+    <div class="section-heading reveal">
+      <small>Featured</small>
+      <h2>Discover your next digital advantage.</h2>
+      <p>
+        A preview of the kinds of products we'll be featuring on HappyDigies.
+      </p>
+    </div>
+
+    <div class="products">
+
+      <article class="card reveal">
+        <div class="card-icon">✦</div>
+        <h3>AI Productivity Tools</h3>
+        <p>
+          Discover tools that can help you work smarter, automate tasks
+          and create faster.
+        </p>
+        <a href="#" class="card-link">Explore →</a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">◈</div>
+        <h3>Courses & Learning</h3>
+        <p>
+          Find practical courses and educational resources to build
+          valuable skills.
+        </p>
+        <a href="#" class="card-link">Explore →</a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">◇</div>
+        <h3>Templates & Resources</h3>
+        <p>
+          Useful templates, guides and digital resources designed to
+          save you time.
+        </p>
+        <a href="#" class="card-link">Explore →</a>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Story -->
+
+  <section id="story" class="story">
+
+    <div class="story-content reveal">
+
+      <small>THE HAPPYDIGIES IDEA</small>
+
+      <h2>
+        The internet is full of possibilities.
+        <span class="gradient-text">We'll help you find them.</span>
+      </h2>
+
+      <p>
+        HappyDigies is being created to make discovering useful digital
+        products easier, more enjoyable and more trustworthy.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="logo">Happy<span>Digies</span></div>
+
+        <p>
+          Discover digital products, tools and resources that can help
+          you learn, create, work and grow.
+        </p>
+      </div>
+
+      <div class="footer-links">
+
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <a href="#discover">Products</a>
+          <a href="#categories">Categories</a>
+          <a href="#story">About</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Copyright & IP</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Trust</h4>
+          <a href="#">Data Protection</a>
+          <a href="#">Security</a>
+          <a href="#">Affiliate Disclosure</a>
+          <a href="#">Contact</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 HappyDigies. All rights reserved.
+    </div>
+
+  </footer>
+
+  <script>
+
+    /* Scroll reveal */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    /* Parallax */
+
+    const parallax = document.querySelector("[data-parallax]");
+
+    window.addEventListener("scroll", () => {
+
+      if (!parallax) return;
+
+      const scrollPosition = window.scrollY;
+
+      parallax.style.transform =
+        `translateY(${scrollPosition * 0.12}px)`;
+
+    });
+
+    /* 3D card movement */
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => {
+
+      card.addEventListener("mousemove", (event) => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 18;
+        const rotateY = (centerX - x) / 18;
+
+        card.style.transform =
+          `translateY(-12px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
